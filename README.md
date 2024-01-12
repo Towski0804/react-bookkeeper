@@ -1,14 +1,13 @@
-# 使用方法
+# Quick Start
 
-## 开发
+## Develop
 
 ```bash
 npm run dev
 ```
 
-## 部署
+## Deploy
 
-请先将 bin/deploy_to_github.sh 中的 `git@github.com:FrankFang/react-mangosteen-1-preview.git` 替换为你的仓库地址，然后在 bash 中执行：
 ```bash
 bin/deploy_to_github.sh
 #或

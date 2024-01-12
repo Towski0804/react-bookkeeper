@@ -11,8 +11,8 @@ export default defineConfig((env) => {
     server: {
       proxy: {
         '/api/': {
-          target: 'http://121.196.236.94:8080/',
-          changeOrigin: false,
+          target: 'https://mangosteen2.hunger-valley.com/',
+          changeOrigin: true,
         },
       }
     },
