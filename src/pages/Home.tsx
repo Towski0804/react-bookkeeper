@@ -13,7 +13,7 @@ export const Home: React.FC<Props> = (props) => {
   useTitle(props.title)
   const { get } = useAjax({ showLoading: true, handleError: false })
   const { data: meData, error: meError } = useSWR('/api/v1/me', async path => {
-    // 如果返回 403 就让用户先登录
+    // 如果返回 401 就让用户先登录
     const response = await get<Resource<User>>(path)
     return response.data.resource
   })

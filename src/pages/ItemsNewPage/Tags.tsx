@@ -16,7 +16,7 @@ const Div = styled.div`
 `
 export const Tags: React.FC<Props> = (props) => {
   const { kind } = props
-  const getKey = (pageIndex: number, prev: Resources<Item>) => {
+  const getKey = (pageIndex: number, prev: Resources<Tag>) => {
     if (prev) {
       const sendCount = (prev.pager.page - 1) * prev.pager.per_page + prev.resources.length
       const count = prev.pager.count
