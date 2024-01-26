@@ -14,14 +14,14 @@ import type { Time } from '../lib/time'
 import { time } from '../lib/time'
 import { BackIcon } from '../components/BackIcon'
 
-type Groups = { happen_at: string; amount: number }[]
+type Groups = { happened_at: string; amount: number }[]
 type Groups2 = { tag_id: number; tag: Tag; amount: number }[]
 const format = 'yyyy-MM-dd'
 type GetKeyParams = {
   start: Time
   end: Time
   kind: Item['kind']
-  group_by: 'happen_at' | 'tag_id'
+  group_by: 'happened_at' | 'tag_id'
 }
 const getKey = ({ start, end, kind, group_by }: GetKeyParams) => {
   return `/api/v1/items/summary?happened_after=${start.format('yyyy-MM-dd')}&happened_before=${end.format('yyyy-MM-dd')}&kind=${kind}&group_by=${group_by}`
@@ -43,10 +43,10 @@ export const StatisticsPage: React.FC = () => {
   }
   const { start, end } = timeRange
   const defaultItems = generateDefaultItems(start)
-  const { data: items } = useSWR(getKey({ start, end, kind, group_by: 'happen_at' }),
+  const { data: items } = useSWR(getKey({ start, end, kind, group_by: 'happened_at' }),
     async (path) =>
       (await get<{ groups: Groups; total: number }>(path)).data.groups
-        .map(({ happen_at, amount }) => ({ x: happen_at, y: (amount / 100).toFixed(2) }))
+        .map(({ happened_at, amount }) => ({ x: happened_at, y: (amount / 100).toFixed(2) }))
   )
   const normalizedItems = defaultItems?.map((defaultItem, index) =>
     items?.find((item) => item.x === defaultItem.x) || defaultItem

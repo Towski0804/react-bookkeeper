@@ -14,14 +14,14 @@ export const useCreateItemStore = create<CreateItem>((set, get) => {
   return {
     data: {
       kind: 'expenses',
-      tag_ids: [],
-      happen_at: time().isoString,
+      tag_id: undefined,
+      happened_at: time().isoString,
       amount: 0
     },
     error: {
       kind: [],
-      tag_ids: [],
-      happen_at: [],
+      tag_id: [],
+      happened_at: [],
       amount: []
     },
     setData: (data: Partial<Data>) => {

@@ -17,7 +17,7 @@ export const useSignInStore = create<SignIn>((set, get) => (
   {
     data: {
       // TODO: 删掉这个邮箱地址
-      email: 'chao.wang5@foxmail.com',
+      email: 'Paul_Klein@gmail.com',
       code: '123456'
     },
     error: {

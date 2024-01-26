@@ -23,9 +23,9 @@ type Item = {
   user_id: number
   amount: number
   note?: string
-  tag_ids: number[]
-  tags?: Tag[]
-  happen_at: string
+  tag_id: number
+  tag?: Tag
+  happened_at: string
   created_at: string
   updated_at: string
   kind: 'expenses' | 'income'

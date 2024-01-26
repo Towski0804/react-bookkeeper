@@ -7,8 +7,8 @@ import { useAjax } from '../../lib/ajax'
 
 type Props = {
   kind: Item['kind']
-  value?: Item['tag_ids']
-  onChange?: (ids: Item['tag_ids']) => void
+  value?: Item['tag_id']
+  onChange?: (ids: Item['tag_id']) => void
 }
 const Div = styled.div`
   padding: 16px;
@@ -58,10 +58,10 @@ export const Tags: React.FC<Props> = (props) => {
           {
             data.map(({ resources }, index) => {
               return resources.map((tag, index) =>
-                <li key={index} onClick={() => { props.onChange?.([tag.id]) }} >
+                <li key={index} onClick={() => { props.onChange?.(tag.id) }} >
                   <LongPressable className="w-48px flex justify-center items-center flex-col gap-y-8px"
                     onEnd={() => { nav(`/tags/${tag.id}`) }}>
-                    {props.value?.includes(tag.id)
+                    {props.value === tag.id
                       ? <span block w-48px h-48px rounded="24px" bg="#EFEFEF"
                         flex justify-center items-center text-24px b-1 b-solid b="#8F4CD7">{tag.sign}</span>
                       : <span block w-48px h-48px rounded="24px" bg="#EFEFEF"

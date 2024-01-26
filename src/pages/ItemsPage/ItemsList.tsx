@@ -52,13 +52,13 @@ export const ItemsList: React.FC<Props> = (props) => {
               border-b-1 b-solid b="#EEE">
               <div row-start-1 col-start-1 row-end-3 col-end-2 text-24px w-48px h-48px
                 bg="#D8D8D8" rounded="50%" flex justify-center items-center>
-                😘
+                {item.tag?.sign}
               </div>
               <div row-start-1 col-start-2 row-end-2 col-end-3>
-                {item.tags?.[0].name}
+                {item.tag?.name}
               </div>
               <div row-start-2 col-start-2 row-end-3 col-end-4 text="#999999">
-                {time(item.happen_at).format('yyyy-MM-dd HH:mm')}
+                {time(item.happened_at).format('yyyy-MM-dd HH:mm')}
               </div>
               <div row-start-1 col-start-3 row-end-2 col-end-4 text="#53A867">
                 ￥{item.amount / 100}
