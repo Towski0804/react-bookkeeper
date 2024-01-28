@@ -8,14 +8,6 @@ import { svgsprites } from './vite_plugins/svgsprites'
 export default defineConfig((env) => {
   const { command } = env
   return {
-    // server: {
-    //   proxy: {
-    //     '/api/': {
-    //       target: 'https://mangosteen2.hunger-valley.com/',
-    //       changeOrigin: true,
-    //     },
-    //   }
-    // },
     define: {
       isDev: command === 'serve'
     },
