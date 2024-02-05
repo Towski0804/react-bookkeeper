@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom'
 import { useLoadingStore } from '../stores/useLoadingStore'
 
 export const ajax = axios.create({
-  baseURL: isDev ? 'http://47.94.146.59:3000/' : 'http://47.94.146.59:3000/',
+  baseURL: isDev ? 'http://localhost:3000' : 'https://cws-project.site/',
   headers: {
     'Content-Type': 'application/json'
   },
