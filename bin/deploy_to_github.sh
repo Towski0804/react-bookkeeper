@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 rm -rf dist
-npm run build
+pnpm run build
 cd dist
 git init
 git add .
