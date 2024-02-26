@@ -32,7 +32,7 @@ export const ItemsPage: React.FC = () => {
   const { visible, setVisible } = useMenuStore()
   const { start, end } = timeRange
   return (
-    <div>
+    <div relative overflow-hidden min-h-100vh>
       <Gradient>
         <TopNav title="账目列表" icon={
           <Icon name="menu" className="w-24px h-24px"

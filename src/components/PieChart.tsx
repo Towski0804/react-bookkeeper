@@ -27,7 +27,8 @@ export const PieChart: React.FC<Props> = (props) => {
       series: [{
         type: 'pie',
         radius: '90%',
-        data: items.map((item, index) => ({ ...item, value: parseFloat(item.value.toString()) }))
+        data: items.map((item, index) => ({ ...item, value: parseFloat(item.value.toString()) })),
+        labelLayout: {moveOverlap: 'shiftY'},
       }]
     }
 
@@ -42,8 +43,6 @@ export const PieChart: React.FC<Props> = (props) => {
     myChart.current?.setOption(option)
   }, [items])
   return (
-    <>
       <div ref={div} className={className}></div>
-    </>
   )
 }

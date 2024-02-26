@@ -29,10 +29,10 @@ export const TopMenu: React.FC<Props> = (props) => {
   } // workaround
   return (
     <>
-      <animated.div fixed top-0 left-0 w="100%" h="100%" className="bg-black:75"
+      <animated.div absolute top-0 left-0 w="100%" h-100vh className="bg-black:75"
         style={maskStyles2} z="[calc(var(--z-menu)-1)]" onClick={onClickMask}
       />
-      <animated.div fixed top-0 left-0 w="70vw" max-w-20em h-screen flex flex-col
+      <animated.div absolute top-0 left-0 w="70vw" max-w-20em h-screen flex flex-col
         style={menuStyles}
         z="[var(--z-menu)]">
         <CurrentUser className="grow-0 shrink-0" />

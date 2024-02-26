@@ -25,12 +25,6 @@ export const useAjax = (options?: Options) => {
   const table: Record<string, undefined | (() => void)> = {
     401: () => {
       nav('/sign_in')
-    },
-    402: () => {
-      window.alert('请付费后观看')
-    },
-    403: () => {
-      window.alert('没有权限')
     }
   }
   const showLoading = options?.showLoading || false

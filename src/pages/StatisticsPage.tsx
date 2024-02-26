@@ -93,7 +93,7 @@ export const StatisticsPage: React.FC = () => {
         </div>
       </div>
       <LineChart className="h-120px" items={normalizedItems} />
-      <PieChart className="h-260px m-t-16px" items={items2} />
+      <PieChart className="h-260px m-y-28px" items={items2} />
       <RankChart className="m-t-8px" items={items2} />
     </div>
   )
