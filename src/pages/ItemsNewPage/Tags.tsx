@@ -50,8 +50,8 @@ export const Tags: React.FC<Props> = (props) => {
           gap-y-16px py-16px px-8px>
           <li>
             <Link to={`/tags/new?kind=${kind}`}>
-              <span block w-48px h-48px rounded="24px" bg="#EFEFEF"
-                flex justify-center items-center text-24px text="#8F4CD7"
+              <span block w-48px h-48px rounded="24px" bg="#e3e0cf"
+                flex justify-center items-center text-24px text="#423d3c"
               ><Icon name="add" /></span>
             </Link>
           </li>
@@ -62,9 +62,9 @@ export const Tags: React.FC<Props> = (props) => {
                   <LongPressable className="w-48px flex justify-center items-center flex-col gap-y-8px"
                     onEnd={() => { nav(`/tags/${tag.id}`) }}>
                     {props.value === tag.id
-                      ? <span block w-48px h-48px rounded="24px" bg="#EFEFEF"
-                        flex justify-center items-center text-24px b-1 b-solid b="#8F4CD7">{tag.sign}</span>
-                      : <span block w-48px h-48px rounded="24px" bg="#EFEFEF"
+                      ? <span block w-48px h-48px rounded="24px" bg="#b9b7a9"
+                        flex justify-center items-center text-24px>{tag.sign}</span>
+                      : <span block w-48px h-48px rounded="24px" bg="#e3e0cf"
                         flex justify-center items-center text-24px b-1 b-solid b-transparent>{tag.sign}</span>
                     }
                     <span text-12px text="#666">{tag.name}</span>
@@ -79,7 +79,7 @@ export const Tags: React.FC<Props> = (props) => {
           ? page === 1 && last.resources.length === 0 ? <Div>点击加号，创建新标签</Div> : <Div>没有更多数据了</Div>
           : isLoading
             ? <Div>数据加载中...</Div>
-            : <Div><button j-btn onClick={onLoadMore}>加载更多</button></Div>}
+            : <Div><button p-btn onClick={onLoadMore}>加载更多</button></Div>}
       </div>
     )
   }

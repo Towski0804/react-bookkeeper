@@ -32,7 +32,7 @@ export const Input = <T extends string>(props: Props<T>) => {
     switch (props.type) {
       case undefined:
       case 'text':
-        return <input j-input-text type='text' {...common} />
+        return <input p-input-text type='text' {...common} />
       case 'emoji':
         return <EmojiInput {...common} />
       case 'select':

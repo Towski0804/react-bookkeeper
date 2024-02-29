@@ -71,7 +71,7 @@ export const router = createBrowserRouter([
       { path: '/tags/:id', element: <TagsEditPage /> },
       { path: '/statistics', element: <StatisticsPage /> },
       { path: '/export', element: <ComingSoonPage /> },
-      { path: '/noty', element: <ComingSoonPage /> },
+      { path: '/notification', element: <ComingSoonPage /> },
     ]
   },
 ])

@@ -2,9 +2,11 @@ import { animated, useTransition } from '@react-spring/web'
 import type { ReactNode } from 'react'
 import { useEffect, useRef, useState } from 'react'
 import { useLocation, useNavigate, useOutlet } from 'react-router-dom'
-import logo from '../assets/images/logo.svg'
+import logo from '../assets/icons/logo.svg'
 import { useSwipe } from '../hooks/useSwipe'
 import { useLocalStore } from '../stores/useLocalStore'
+import s from './WelcomeLayout.module.scss'
+
 const linkMap: Record<string, string> = {
   '/welcome/1': '/welcome/2',
   '/welcome/2': '/welcome/3',
@@ -47,16 +49,16 @@ export const WelcomeLayout: React.FC = () => {
     nav('/home')
   }
   return (
-    <div className="bg-#5f34bf" h-screen flex flex-col items-stretch pb-16px>
-      <span fixed text-white top-16px right-16px text-32px onClick={onSkip}>跳过</span>
-      <header shrink-0 text-center pt-64px>
-        <img src={logo} w-64px h-69px />
-        <h1 text="#D4D4EE" text-32px>BookEase</h1>
+    <div className="bg-#f1f3ed" h-screen flex flex-col items-stretch pb-16px overflow-hidden>
+      <span fixed text="#573938" top-16px right-16px text-32px className={s.skip} onClick={onSkip}>跳过</span>
+      <header shrink-0 text-center pt-100px>
+        <img src={logo} w-100px h-100px />
+        <h1 text="#573938" text-32px>BookEase</h1>
       </header>
       <main shrink-1 grow-1 relative ref={main} >
         {transitions((style, pathname) =>
           <animated.div key={pathname} style={{ ...style, ...extraStyle }} w="100%" h="100%" p-16px flex>
-            <div grow-1 bg-white flex justify-center items-center rounded-8px>
+            <div grow-1 flex justify-center items-center rounded-8px bg-white>
               {map.current[pathname]}
             </div>
           </animated.div>

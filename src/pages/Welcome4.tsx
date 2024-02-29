@@ -11,13 +11,13 @@ export const Welcome4: React.FC = () => {
   }
   return (
     <div text-center>
-      <img src={p} w-129px h-83px />
-      <h2 text-32px mt-48px >
+      <img src={p} w-150px h-150px/>
+      <h2 text-32px mt-48px text="#573938">
         云备份 <br />
         再也不怕数据丢失
       </h2>
       <div mt-64px>
-        <span text-32px color="#6035BF" font-bold onClick={onSkip}>开启应用</span>
+        <span text-32px color="#573938" font-bold onClick={onSkip}>开启应用</span>
       </div>
     </div>
   )

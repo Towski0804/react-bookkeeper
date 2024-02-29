@@ -13,7 +13,7 @@ export default defineConfig((env) => {
     plugins: [
       Unocss(),
       react(),
-      svgsprites({ noOptimizeList: ['pig', 'logo', 'chart', 'category', 'export', 'noty', 'calendar'] })
+      svgsprites({ noOptimizeList: ['piggy', 'logo', 'chart', 'category', 'export', 'notification', 'calendar'] })
     ]
   }
 })
