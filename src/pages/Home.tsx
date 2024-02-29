@@ -1,6 +1,5 @@
 import useSWR from 'swr'
 import { Link, Navigate } from 'react-router-dom'
-import p from '../assets/images/pig.svg'
 import { useAjax } from '../lib/ajax'
 import { useTitle } from '../hooks/useTitle'
 import { Loading } from '../components/Loading'
@@ -34,11 +33,11 @@ export const Home: React.FC<Props> = (props) => {
 
   return <div>
     <div flex justify-center items-center>
-      <Icon className="mt-20vh mb-20vh w-128px h-128px" name="pig" />
+      <Icon className="mt-20vh mb-20vh w-128px h-128px" name="piggy" />
     </div>
     <div px-16px>
       <Link to="/items/new">
-        <button j-btn>开始记账</button>
+        <button p-btn>开始记账</button>
       </Link>
     </div>
     <AddItemFloatButton />
