@@ -1,10 +1,10 @@
-import useSWR from 'swr';
-import { Link, Navigate } from 'react-router-dom';
-import { useAjax } from '../lib/ajax';
-import { useTitle } from '../hooks/useTitle';
-import { Loading } from '../components/Loading';
-import { AddItemFloatButton } from '../components/AddItemFloatButton';
-import { Icon } from '../components/Icon';
+import useSWR from 'swr'
+import { Link, Navigate } from 'react-router-dom'
+import { useAjax } from '../lib/ajax'
+import { useTitle } from '../hooks/useTitle'
+import { Loading } from '../components/Loading'
+import { AddItemFloatButton } from '../components/AddItemFloatButton'
+import { Icon } from '../components/Icon'
 interface Props {
   title?: string;
 }
