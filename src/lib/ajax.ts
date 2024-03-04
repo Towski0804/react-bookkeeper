@@ -13,7 +13,9 @@ export const ajax = axios.create({
 ajax.interceptors.request.use((config) => {
   const jwt = localStorage.getItem('jwt') || ''
   config.headers = config.headers || {}
-  if (jwt) { config.headers.Authorization = `Bearer ${jwt}` }
+  if (jwt) {
+    config.headers.Authorization = `Bearer ${jwt}`
+  }
   return config
 })
 
@@ -43,28 +45,56 @@ export const useAjax = (options?: Options) => {
   }
   return {
     get: <T>(path: string, config?: AxiosRequestConfig<any>) => {
-      if (showLoading) { setVisible(true) }
-      return ajax.get<T>(path, config).catch(onError).finally(() => {
-        if (showLoading) { setVisible(false) }
-      })
+      if (showLoading) {
+        setVisible(true)
+      }
+      return ajax
+        .get<T>(path, config)
+        .catch(onError)
+        .finally(() => {
+          if (showLoading) {
+            setVisible(false)
+          }
+        })
     },
     post: <T>(path: string, data: JSONValue) => {
-      if (showLoading) { setVisible(true) }
-      return ajax.post<T>(path, data).catch(onError).finally(() => {
-        if (showLoading) { setVisible(false) }
-      })
+      if (showLoading) {
+        setVisible(true)
+      }
+      return ajax
+        .post<T>(path, data)
+        .catch(onError)
+        .finally(() => {
+          if (showLoading) {
+            setVisible(false)
+          }
+        })
     },
     patch: <T>(path: string, data: JSONValue) => {
-      if (showLoading) { setVisible(true) }
-      return ajax.patch<T>(path, data).catch(onError).finally(() => {
-        if (showLoading) { setVisible(false) }
-      })
+      if (showLoading) {
+        setVisible(true)
+      }
+      return ajax
+        .patch<T>(path, data)
+        .catch(onError)
+        .finally(() => {
+          if (showLoading) {
+            setVisible(false)
+          }
+        })
     },
     destroy: <T>(path: string) => {
-      if (showLoading) { setVisible(true) }
-      return ajax.delete<T>(path).catch(onError).finally(() => {
-        if (showLoading) { setVisible(false) }
-      })
-    },
+      if (showLoading) {
+        setVisible(true)
+      }
+      return ajax
+        .delete<T>(path)
+        .catch(onError)
+        .finally(() => {
+          if (showLoading) {
+            setVisible(false)
+          }
+        })
+    }
   }
 }

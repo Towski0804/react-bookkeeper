@@ -1,58 +1,58 @@
-import styled from 'styled-components';
-import useSWRInfinite from 'swr/infinite';
-import { useAjax } from '../../lib/ajax';
-import type { Time } from '../../lib/time';
-import { time } from '../../lib/time';
+import styled from 'styled-components'
+import useSWRInfinite from 'swr/infinite'
+import { useAjax } from '../../lib/ajax'
+import type { Time } from '../../lib/time'
+import { time } from '../../lib/time'
 interface Props {
-  start: Time;
-  end: Time;
+  start: Time
+  end: Time
 }
 const Div = styled.div`
   padding: 16px;
   text-align: center;
-`;
+`
 export const ItemsList: React.FC<Props> = (props) => {
-  const { start, end } = props;
-  const { get } = useAjax();
+  const { start, end } = props
+  const { get } = useAjax()
   const getKey = (pageIndex: number, prev: Resources<Item>) => {
     if (prev) {
       const sendCount =
-        (prev.pager.page - 1) * prev.pager.per_page + prev.resources.length;
-      const count = prev.pager.count;
+        (prev.pager.page - 1) * prev.pager.per_page + prev.resources.length
+      const count = prev.pager.count
       if (sendCount >= count) {
-        return null;
+        return null
       }
     }
     return (
       `/api/v1/items?page=${pageIndex + 1}&` +
       `happened_after=${start.removeTime().isoString}&` +
       `happened_before=${end.removeTime().isoString}`
-    );
-  };
+    )
+  }
   const { data, error, size, setSize } = useSWRInfinite(
     getKey,
     async (path) => (await get<Resources<Item>>(path)).data,
     { revalidateAll: true }
-  );
+  )
   const onLoadMore = () => {
-    setSize(size + 1);
-  };
-  const isLoadingInitialData = !data && !error;
-  const isLoadingMore = data?.[size - 1] === undefined && !error;
-  const isLoading = isLoadingInitialData || isLoadingMore;
+    setSize(size + 1)
+  }
+  const isLoadingInitialData = !data && !error
+  const isLoadingMore = data?.[size - 1] === undefined && !error
+  const isLoading = isLoadingInitialData || isLoadingMore
   if (!data) {
     return (
       <div>
         {error && <Div>数据加载失败，请刷新页面</Div>}
         {isLoading && <Div>数据加载中...</Div>}
       </div>
-    );
+    )
   } else {
-    const last = data[data.length - 1];
-    const { page, per_page, count } = last.pager;
-    const hasMore = (page - 1) * per_page + last.resources.length < count;
+    const last = data[data.length - 1]
+    const { page, per_page, count } = last.pager
+    const hasMore = (page - 1) * per_page + last.resources.length < count
     return (
-      <>
+      <div className="min-h-[calc(78vh-32px)]">
         <ol>
           {data.map(({ resources }) => {
             return resources.map((item) => (
@@ -94,7 +94,7 @@ export const ItemsList: React.FC<Props> = (props) => {
                   ￥{item.amount / 100}
                 </div>
               </li>
-            ));
+            ))
           })}
         </ol>
         {error && <Div>数据加载失败，请刷新页面</Div>}
@@ -109,7 +109,7 @@ export const ItemsList: React.FC<Props> = (props) => {
             </button>
           </Div>
         )}
-      </>
-    );
+      </div>
+    )
   }
-};
+}
