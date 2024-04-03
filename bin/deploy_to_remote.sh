@@ -1,12 +1,12 @@
 rm -rf dist
-pnpm install
-pnpm run build
+bun install
+bun run build
 
 tar -czvf dist.tar.gz dist 
 
-scp ./dist.tar.gz gddEC2:/home/ubuntu/bookkeeper &&
+scp ./dist.tar.gz gududuHK:/root/www/bkp &&
 rm -rf dist.tar.gz &&
 
-ssh gddEC2 sudo rm -rf /home/ubuntu/bookkeeper/dist &&
-ssh gddEC2 tar -xzvf /home/ubuntu/bookkeeper/dist.tar.gz -C /home/ubuntu/bookkeeper && 
-ssh gddEC2 sudo rm -rf /home/ubuntu/bookkeeper/dist.tar.gz
+ssh gududuHK sudo rm -rf /root/www/bkp/dist &&
+ssh gududuHK tar -xzvf /root/www/bkp/dist.tar.gz -C /root/www/bkp && 
+ssh gududuHK sudo rm -rf /root/www/bkp/dist.tar.gz
