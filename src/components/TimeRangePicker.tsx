@@ -124,7 +124,7 @@ export const TimeRangePicker: React.FC<Props> = (props) => {
         tabItems={timeRanges}
         value={selected}
         onChange={onSelect}
-        className="h-5vh"
+        className="h-5svh"
       />
     </>
   );

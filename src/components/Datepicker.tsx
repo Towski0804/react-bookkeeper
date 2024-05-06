@@ -77,7 +77,7 @@ export const Column: React.FC<ColumnProps> = (props) => {
     _setTranslateY(y)
   }
   return (
-    <div className={className} h="50vh" overflow-hidden relative
+    <div className={className} h="50svh" overflow-hidden relative
       onTouchStart={(e) => {
         setIsTouching(true)
         setLastY(e.touches[0].clientY)

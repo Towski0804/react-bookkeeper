@@ -34,7 +34,7 @@ export const ItemsSummary: React.FC<Props> = (props) => {
       px-24px
       children-px-4px
       text-center
-      h-9vh
+      h-9svh
     >
       <li text="#FE7275">
         <div>收入</div>

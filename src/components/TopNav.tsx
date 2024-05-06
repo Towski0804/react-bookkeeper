@@ -6,7 +6,7 @@ interface Props {
 }
 export const TopNav: React.FC<Props> = ({ title = 'BookEase', icon }) => {
   return (
-    <div text="#423d3c" flex items-center pt-24px pb-8px px-24px h-8vh>
+    <div text="#423d3c" flex items-center pt-24px pb-8px px-24px h-8svh>
       <span
         w-24px
         mr-16px
