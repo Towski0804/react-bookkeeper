@@ -52,7 +52,7 @@ export const ItemsList: React.FC<Props> = (props) => {
     const { page, per_page, count } = last.pager
     const hasMore = (page - 1) * per_page + last.resources.length < count
     return (
-      <div className="min-h-[calc(78vh-32px)]">
+      <div className="h-[calc(78vh-32px)] overflow-y-scroll">
         <ol>
           {data.map(({ resources }) => {
             return resources.map((item) => (
