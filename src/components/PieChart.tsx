@@ -12,8 +12,12 @@ export const PieChart: React.FC<Props> = (props) => {
   const initialized = useRef(false)
   const myChart = useRef<echarts.ECharts>()
   useEffect(() => {
-    if (!div.current) { return }
-    if (initialized.current) { return }
+    if (!div.current) {
+      return
+    }
+    if (initialized.current) {
+      return
+    }
     myChart.current = echarts.init(div.current)
     initialized.current = true
     const option: EChartsOption = {
@@ -24,25 +28,29 @@ export const PieChart: React.FC<Props> = (props) => {
         }
       },
       grid: { top: 0, left: 0, bottom: 0, right: 0 },
-      series: [{
-        type: 'pie',
-        radius: '90%',
-        data: items.map((item, index) => ({ ...item, value: parseFloat(item.value.toString()) })),
-        labelLayout: {moveOverlap: 'shiftY'},
-      }]
+      series: [
+        {
+          type: 'pie',
+          radius: '90%',
+          data: items.map((item, index) => ({
+            ...item,
+            value: parseFloat(item.value.toString())
+          }))
+        }
+      ]
     }
 
     myChart.current.setOption(option)
   }, [])
   useEffect(() => {
     const option: EChartsOption = {
-      series: [{
-        data: items
-      }]
+      series: [
+        {
+          data: items
+        }
+      ]
     }
     myChart.current?.setOption(option)
   }, [items])
-  return (
-      <div ref={div} className={className}></div>
-  )
+  return <div ref={div} className={className}></div>
 }
