@@ -12,15 +12,17 @@ import { Welcome3 } from '../pages/Welcome3'
 import { Welcome4 } from '../pages/Welcome4'
 import { TagsNewPage } from '../pages/TagsNewPage'
 import { TagsEditPage } from '../pages/TagsEditPage'
-import { StatisticsPage } from '../pages/StatisticsPage'
 import { ItemsPageError } from '../pages/ItemsPageError'
 import { ErrorEmptyData, ErrorUnauthorized } from '../errors'
 import { ErrorPage } from '../pages/ErrorPage'
 import { ajax } from '../lib/ajax'
 import { ComingSoonPage } from '../pages/ComingSoonPage'
+import { Suspense, lazy } from 'react'
+
+const StatisticsPage = lazy(() => import('../pages/StatisticsPage'))
 
 export const router = createBrowserRouter([
-  { path: '/', element: <Root />, },
+  { path: '/', element: <Root /> },
   { path: '/home', element: <Home title="首页" /> },
   {
     path: '/welcome',
@@ -29,7 +31,7 @@ export const router = createBrowserRouter([
       { path: '1', element: <Welcome1 /> },
       { path: '2', element: <Welcome2 /> },
       { path: '3', element: <Welcome3 /> },
-      { path: '4', element: <Welcome4 /> },
+      { path: '4', element: <Welcome4 /> }
     ]
   },
   { path: '/sign_in', element: <SignInPage /> },
@@ -40,8 +42,10 @@ export const router = createBrowserRouter([
     element: <Outlet />,
     errorElement: <ErrorPage />,
     loader: async () => {
-      return await ajax.get<Resource<User>>('/api/v1/me').catch(e => {
-        if (e.response?.status === 401) { throw new ErrorUnauthorized }
+      return await ajax.get<Resource<User>>('/api/v1/me').catch((e) => {
+        if (e.response?.status === 401) {
+          throw new ErrorUnauthorized()
+        }
         throw e
       })
     },
@@ -52,10 +56,14 @@ export const router = createBrowserRouter([
         errorElement: <ItemsPageError />,
         loader: async () => {
           const onError = (error: AxiosError) => {
-            if (error.response?.status === 401) { throw new ErrorUnauthorized() }
+            if (error.response?.status === 401) {
+              throw new ErrorUnauthorized()
+            }
             throw error
           }
-          const response = await ajax.get<Resources<Item>>('/api/v1/items?page=1').catch(onError)
+          const response = await ajax
+            .get<Resources<Item>>('/api/v1/items?page=1')
+            .catch(onError)
           if (response.data.resources.length > 0) {
             return response.data
           } else {
@@ -65,13 +73,20 @@ export const router = createBrowserRouter([
       },
       {
         path: '/items/new',
-        element: <ItemsNewPage />,
+        element: <ItemsNewPage />
       },
       { path: '/tags/new', element: <TagsNewPage /> },
       { path: '/tags/:id', element: <TagsEditPage /> },
-      { path: '/statistics', element: <StatisticsPage /> },
+      {
+        path: '/statistics',
+        element: (
+          <Suspense>
+            <StatisticsPage />
+          </Suspense>
+        )
+      },
       { path: '/export', element: <ComingSoonPage /> },
-      { path: '/notification', element: <ComingSoonPage /> },
+      { path: '/notification', element: <ComingSoonPage /> }
     ]
-  },
+  }
 ])

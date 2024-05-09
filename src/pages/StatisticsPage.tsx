@@ -1,50 +1,50 @@
-import { useState } from 'react';
-import useSWR from 'swr';
-import type { TimeRange } from '../components/TimeRangePicker';
-import { TimeRangePicker } from '../components/TimeRangePicker';
-import { TopNav } from '../components/TopNav';
-import { LineChart } from '../components/LineChart';
-import { PieChart } from '../components/PieChart';
-import { RankChart } from '../components/RankChart';
-import { Input } from '../components/Input';
-import { useAjax } from '../lib/ajax';
-import type { Time } from '../lib/time';
-import { time } from '../lib/time';
-import { BackIcon } from '../components/BackIcon';
+import { useState } from 'react'
+import useSWR from 'swr'
+import type { TimeRange } from '../components/TimeRangePicker'
+import { TimeRangePicker } from '../components/TimeRangePicker'
+import { TopNav } from '../components/TopNav'
+import { LineChart } from '../components/LineChart'
+import { PieChart } from '../components/PieChart'
+import { RankChart } from '../components/RankChart'
+import { Input } from '../components/Input'
+import { useAjax } from '../lib/ajax'
+import type { Time } from '../lib/time'
+import { time } from '../lib/time'
+import { BackIcon } from '../components/BackIcon'
 
-type Groups = { happened_at: string; amount: number }[];
-type Groups2 = { tag_id: number; tag: Tag; amount: number }[];
-const format = 'yyyy-MM-dd';
+type Groups = { happened_at: string; amount: number }[]
+type Groups2 = { tag_id: number; tag: Tag; amount: number }[]
+const format = 'yyyy-MM-dd'
 type GetKeyParams = {
-  start: Time;
-  end: Time;
-  kind: Item['kind'];
-  group_by: 'happened_at' | 'tag_id';
-};
+  start: Time
+  end: Time
+  kind: Item['kind']
+  group_by: 'happened_at' | 'tag_id'
+}
 const getKey = ({ start, end, kind, group_by }: GetKeyParams) => {
   return `/api/v1/items/summary?happened_after=${start.format(
     'yyyy-MM-dd'
   )}&happened_before=${end.format(
     'yyyy-MM-dd'
-  )}&kind=${kind}&group_by=${group_by}`;
-};
+  )}&kind=${kind}&group_by=${group_by}`
+}
 export const StatisticsPage: React.FC = () => {
   const [timeRange, setTimeRange] = useState<TimeRange>({
     name: 'thisMonth',
     start: time().firstDayOfMonth,
     end: time().lastDayOfMonth.add(1, 'day')
-  });
-  const [kind, setKind] = useState<Item['kind']>('expenses');
-  const { get } = useAjax({ showLoading: false, handleError: true });
+  })
+  const [kind, setKind] = useState<Item['kind']>('expenses')
+  const { get } = useAjax({ showLoading: false, handleError: true })
 
   const generateDefaultItems = (time: Time) => {
     return Array.from({ length: start.dayCountOfMonth }).map((_, i) => {
-      const x = start.clone.add(i, 'day').format(format);
-      return { x, y: 0 };
-    });
-  };
-  const { start, end } = timeRange;
-  const defaultItems = generateDefaultItems(start);
+      const x = start.clone.add(i, 'day').format(format)
+      return { x, y: 0 }
+    })
+  }
+  const { start, end } = timeRange
+  const defaultItems = generateDefaultItems(start)
   const { data: items } = useSWR(
     getKey({ start, end, kind, group_by: 'happened_at' }),
     async (path) =>
@@ -54,11 +54,11 @@ export const StatisticsPage: React.FC = () => {
           y: (amount / 100).toFixed(2)
         })
       )
-  );
+  )
   const normalizedItems = defaultItems?.map(
     (defaultItem, index) =>
       items?.find((item) => item.x === defaultItem.x) || defaultItem
-  );
+  )
   const { data: items2 } = useSWR(
     getKey({ start, end, kind, group_by: 'tag_id' }),
     async (path) =>
@@ -69,7 +69,7 @@ export const StatisticsPage: React.FC = () => {
           sign: tag.sign
         })
       )
-  );
+  )
   return (
     <div>
       <TopNav title="统计图表" icon={<BackIcon />} />
@@ -132,5 +132,7 @@ export const StatisticsPage: React.FC = () => {
       <PieChart className="h-260px m-y-28px" items={items2} />
       <RankChart className="m-t-8px" items={items2} />
     </div>
-  );
-};
+  )
+}
+
+export default StatisticsPage
