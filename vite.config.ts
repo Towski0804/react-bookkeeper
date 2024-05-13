@@ -13,8 +13,31 @@ export default defineConfig((env) => {
     plugins: [
       Unocss(),
       react(),
-      svgsprites({ noOptimizeList: ['piggy', 'logo', 'chart', 'category', 'export', 'notification', 'calendar'] })
-    ]
+      svgsprites({
+        noOptimizeList: [
+          'piggy',
+          'logo',
+          'chart',
+          'category',
+          'export',
+          'notification',
+          'calendar'
+        ]
+      })
+    ],
+    build: {
+      rollupOptions: {
+        output: {
+          manualChunks(id: any) {
+            if (id.includes('echarts')) {
+              return 'echarts'
+            }
+            if (id.includes('node_modules')) {
+              return 'vendor'
+            }
+          }
+        }
+      }
+    }
   }
 })
-
