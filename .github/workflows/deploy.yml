@@ -1,0 +1,43 @@
+name: Deploy the BKP frontend
+
+on:
+  push:
+    branches:
+      - main # Trigger the workflow on push to the main branch
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '20'
+
+      - name: Install pnpm
+        run: npm install -g pnpm
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Build the project
+        run: pnpm run build
+
+      - name: Archive generated files
+        run: tar -czvf dist.tar.gz dist
+
+      - name: Copy files via scp
+        env:
+          HOST: ${{ secrets.REMOTE_HOST }}
+          USER: ${{ secrets.REMOTE_USER }}
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+        run: |
+          echo "$SSH_PRIVATE_KEY" > private_key
+          chmod 600 private_key
+          scp -i private_key -o StrictHostKeyChecking=no dist.tar.gz $USER@$HOST:/root/www/bkp/
+          ssh -i private_key -o StrictHostKeyChecking=no $USER@$HOST "sudo rm -rf /root/www/bkp/dist && tar -xzvf /root/www/bkp/dist.tar.gz -C /root/www/bkp && sudo rm -rf /root/www/bkp/dist.tar.gz"
+          rm -rf private_key
