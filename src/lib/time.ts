@@ -8,8 +8,18 @@ type Parts = {
   ms: number
 }
 type Unit =
-  | 'year' | 'years' | 'month' | 'months' | 'day' | 'days'
-  | 'hour' | 'hours' | 'minute' | 'minutes' | 'second' | 'seconds'
+  | 'year'
+  | 'years'
+  | 'month'
+  | 'months'
+  | 'day'
+  | 'days'
+  | 'hour'
+  | 'hours'
+  | 'minute'
+  | 'minutes'
+  | 'second'
+  | 'seconds'
   | 'ms'
 
 export const time = (p?: number | string | Date) => {
@@ -83,7 +93,13 @@ export class Time {
     const seconds = this.#date.getSeconds()
     const ms = this.#date.getMilliseconds()
     return {
-      year, month, day, hours, minutes, seconds, ms
+      year,
+      month,
+      day,
+      hours,
+      minutes,
+      seconds,
+      ms
     }
   }
   set parts(p: Partial<Parts>) {
@@ -160,5 +176,9 @@ export class Time {
     const sign = timezone > 0 ? '+' : '-'
     const pad = absolute.toString().padStart(2, '0')
     return `${this.format('yyyy-MM-ddTHH:mm:ss.fff') + sign + pad}:00`
+  }
+
+  get isoUrlString() {
+    return this.isoString.replace('+', '%2B')
   }
 }

@@ -25,8 +25,8 @@ export const ItemsList: React.FC<Props> = (props) => {
     }
     return (
       `/api/v1/items?page=${pageIndex + 1}&` +
-      `happened_after=${start.removeTime().isoString}&` +
-      `happened_before=${end.removeTime().isoString}`
+      `happened_after=${start.removeTime().isoUrlString}&` +
+      `happened_before=${end.removeTime().isoUrlString}`
     )
   }
   const { data, error, size, setSize } = useSWRInfinite(
